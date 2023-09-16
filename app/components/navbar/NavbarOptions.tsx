@@ -21,6 +21,16 @@ const NavbarOptions = () => {
         </span>{" "}
         are proportional corresponding to each other
       </span>
+      <div className="flex gap-2 justify-center items-center mt-2 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-cyan-500 text-sm">
+        <span>
+          min:{" "}
+          <span className="bg-white px-4 rounded text-indigo-600">{MIN}</span>
+        </span>
+        <span>
+          max:{" "}
+          <span className="bg-white px-4 rounded text-indigo-600">{MAX}</span>
+        </span>
+      </div>
     </p>
   );
 
