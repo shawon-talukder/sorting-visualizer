@@ -1,3 +1,5 @@
+import Visualizer from "./components/Visualizer";
+
 export default function Home() {
-  return <main className="text-3xl font-semibold text-green-800">Hello world</main>;
+  return <Visualizer />;
 }
