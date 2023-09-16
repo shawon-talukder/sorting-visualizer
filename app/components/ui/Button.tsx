@@ -20,12 +20,12 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={`relative w-full font-semibold rounded-md transform transition
-      hover:opacity-80 active:translate-y-[1px]  
+      hover:opacity-90 active:translate-y-[1px]  
       disabled:opacity-70 disabled:cursor-not-allowed 
-      ${outline ? "border-2 border-indigo-700 " : ""}
+      ${outline ? "border-2 border-indigo-600" : ""}
        ${small ? "px-2" : "px-4"}
       ${small ? "py-1" : "py-2"}
-      ${isSecondary ? "bg-white" : "bg-indigo-300"}`}
+      ${isSecondary ? "bg-white" : "bg-indigo-600 text-white"}`}
       onSubmit={onAction}
       disabled={disabled}
     >
