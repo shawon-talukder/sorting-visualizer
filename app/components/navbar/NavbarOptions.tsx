@@ -13,7 +13,7 @@ const NavbarOptions = () => {
 
   // array length tooltip label
   const lenTooltipLabel = (
-    <p className="font-semibold text-sm">
+    <div className="font-semibold text-sm">
       <span>
         Array length and{" "}
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-cyan-500">
@@ -31,7 +31,7 @@ const NavbarOptions = () => {
           <span className="bg-white px-4 rounded text-indigo-600">{MAX}</span>
         </span>
       </div>
-    </p>
+    </div>
   );
 
   return (
