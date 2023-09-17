@@ -26,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({
        ${small ? "px-2" : "px-4"}
       ${small ? "py-1" : "py-2"}
       ${isSecondary ? "bg-white" : "bg-indigo-600 text-white"}`}
-      onSubmit={onAction}
+      onClick={onAction}
       disabled={disabled}
     >
       {label}
