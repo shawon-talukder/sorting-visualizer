@@ -2,15 +2,17 @@
 
 import { HiOutlineInformationCircle } from "react-icons/hi";
 
-import { useState } from "react";
+import useArrayStore from "@/app/hooks/useStore";
 import Tooltip from "../ui/Tooltip";
 
 const MIN = 5;
 const MAX = 500;
 
 const NavbarOptions = () => {
-  const [rangeValue, setRangeValue] = useState(200);
-  const [sortValue, setSortValue] = useState("");
+  const arrayLength = useArrayStore((state) => state.arrayLength);
+  const selectedSort = useArrayStore((state) => state.selectedSort);
+  const setArrayLength = useArrayStore((state) => state.setArrayLength);
+  const setSelectedSort = useArrayStore((state) => state.setSelectedSort);
 
   // array length tooltip label
   const lenTooltipLabel = (
@@ -49,7 +51,7 @@ const NavbarOptions = () => {
             />
           </div>
           <div className="px-4 bg-white rounded font-semibold text-indigo-700">
-            {rangeValue}
+            {arrayLength}
           </div>
         </div>
         <div className="w-full">
@@ -58,8 +60,8 @@ const NavbarOptions = () => {
             type="range"
             min={MIN}
             max={MAX}
-            value={rangeValue}
-            onChange={(e) => setRangeValue(parseInt(e.target.value))}
+            value={arrayLength}
+            onChange={(e) => setArrayLength(parseInt(e.target.value))}
             className="range cursor-pointer w-full accent-indigo-700 "
           />
         </div>
@@ -68,8 +70,8 @@ const NavbarOptions = () => {
         <select
           className="w-full px-6 py-2 rounded-md outline-none focus:ring-2 focus:ring-indigo-600 text-neutral-600 cursor-pointer"
           name="sort_selection"
-          value={sortValue}
-          onChange={(e) => setSortValue(e.target.value)}
+          value={selectedSort}
+          onChange={(e) => setSelectedSort(e.target.value)}
         >
           <option value="" hidden>
             Select Algorithm
