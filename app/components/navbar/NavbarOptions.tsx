@@ -3,6 +3,8 @@
 import { HiOutlineInformationCircle } from "react-icons/hi";
 
 import useArrayStore from "@/app/hooks/useStore";
+
+import GradiantText from "../ui/GradiantText";
 import Tooltip from "../ui/Tooltip";
 
 const MIN = 5;
@@ -18,20 +20,25 @@ const NavbarOptions = () => {
   const lenTooltipLabel = (
     <div className="font-semibold text-sm">
       <span>
-        Array length and{" "}
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-cyan-500">
-          animation/sorting speed
-        </span>{" "}
+        Array length and <GradiantText>animation/sorting speed</GradiantText>
         are proportional corresponding to each other
       </span>
-      <div className="flex gap-2 justify-center items-center mt-2 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-cyan-500 text-sm">
+      <div className="flex justify-center items-center gap-2 mt-2 text-sm">
         <span>
-          min:{" "}
-          <span className="bg-white px-4 rounded text-indigo-600">{MIN}</span>
+          <GradiantText>
+            min:{" "}
+            <span className="bg-neutral-100 px-4 rounded text-indigo-600">
+              {MIN}
+            </span>
+          </GradiantText>
         </span>
         <span>
-          max:{" "}
-          <span className="bg-white px-4 rounded text-indigo-600">{MAX}</span>
+          <GradiantText>
+            max:{" "}
+            <span className="bg-neutral-100 px-4 rounded text-indigo-600">
+              {MAX}
+            </span>
+          </GradiantText>
         </span>
       </div>
     </div>
@@ -42,7 +49,10 @@ const NavbarOptions = () => {
       <div className="flex flex-col gap-1 justify-center items-start w-full pr-10">
         <div className="flex gap-3">
           <div className="flex flex-row w-full">
-            <label htmlFor="#" className="font-semibold text-sm lg:text-base">
+            <label
+              htmlFor="range"
+              className="font-semibold text-sm lg:text-base"
+            >
               Array Length
             </label>
             <Tooltip
@@ -56,6 +66,8 @@ const NavbarOptions = () => {
         </div>
         <div className="w-full">
           <input
+            name="range"
+            id="range"
             list="data"
             type="range"
             min={MIN}
