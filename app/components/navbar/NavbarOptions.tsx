@@ -7,8 +7,7 @@ import useArrayStore from "@/app/hooks/useStore";
 import GradiantText from "../ui/GradiantText";
 import Tooltip from "../ui/Tooltip";
 
-const MIN = 5;
-const MAX = 500;
+import { MAX, MIN } from "@/app/components/ArrayBars";
 
 const NavbarOptions = () => {
   const arrayLength = useArrayStore((state) => state.arrayLength);
