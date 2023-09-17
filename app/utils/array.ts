@@ -15,7 +15,7 @@ const getValue = (min: number, max: number) => {
 export const generateArray = (arrLength: number) => {
   const array = [];
   for (let i = 0; i < arrLength; i++) {
-    array.push(getValue(5, 600));
+    array.push(getValue(5, 550));
   }
 
   return array;
