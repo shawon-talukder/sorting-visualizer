@@ -10,6 +10,7 @@ const MAX = 500;
 
 const NavbarOptions = () => {
   const [rangeValue, setRangeValue] = useState(200);
+  const [sortValue, setSortValue] = useState("");
 
   // array length tooltip label
   const lenTooltipLabel = (
@@ -65,8 +66,10 @@ const NavbarOptions = () => {
       </div>
       <div>
         <select
-          className="w-full px-4 py-2 rounded-md outline-none focus:ring-2 focus:ring-indigo-600 text-neutral-600 cursor-pointer "
-          name="sort-selection"
+          className="w-full px-6 py-2 rounded-md outline-none focus:ring-2 focus:ring-indigo-600 text-neutral-600 cursor-pointer"
+          name="sort_selection"
+          value={sortValue}
+          onChange={(e) => setSortValue(e.target.value)}
         >
           <option value="" hidden>
             Select Algorithm
