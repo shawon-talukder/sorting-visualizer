@@ -2,11 +2,22 @@
 
 import { IoMdOptions } from "react-icons/io";
 
+import { useCallback } from "react";
+import useArrayStore from "../hooks/useStore";
 import Container from "./Container";
 import NavbarOptions from "./navbar/NavbarOptions";
 import Button from "./ui/Button";
+import { generateArray } from "./utils/array";
 
 const Navbar = () => {
+  const arrayLength = useArrayStore((state) => state.arrayLength);
+  const setArray = useArrayStore((state) => state.setArray);
+
+  // handlers
+  const handleGenerate = useCallback(() => {
+    setArray(generateArray(arrayLength));
+  }, [arrayLength, setArray]);
+  
   return (
     <div className="w-full shadow-md z-[10] text-neutral-700">
       <Container>
@@ -17,7 +28,7 @@ const Navbar = () => {
                 label="Generate New Array"
                 isSecondary
                 outline
-                onAction={() => {}}
+                onAction={handleGenerate}
               />
             </div>
             <NavbarOptions />
