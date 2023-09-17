@@ -1,13 +1,14 @@
 "use client";
 
+import { useCallback } from "react";
 import { IoMdOptions } from "react-icons/io";
 
-import { useCallback } from "react";
 import useArrayStore from "../hooks/useStore";
+
+import { generateArray } from "../utils/array";
 import Container from "./Container";
 import NavbarOptions from "./navbar/NavbarOptions";
 import Button from "./ui/Button";
-import { generateArray } from "./utils/array";
 
 const Navbar = () => {
   const arrayLength = useArrayStore((state) => state.arrayLength);
@@ -17,7 +18,7 @@ const Navbar = () => {
   const handleGenerate = useCallback(() => {
     setArray(generateArray(arrayLength));
   }, [arrayLength, setArray]);
-  
+
   return (
     <div className="w-full shadow-md z-[10] text-neutral-700">
       <Container>
