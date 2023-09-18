@@ -10,7 +10,6 @@ import NavbarOptions from "./navbar/NavbarOptions";
 import Button from "./ui/Button";
 
 import { MergeSort } from "../algorithms/MergeSort";
-import { generateArray } from "../utils/array";
 
 const Navbar = () => {
   const arrayLength = useArrayStore((state) => state.arrayLength);
@@ -19,13 +18,12 @@ const Navbar = () => {
   const setArray = useArrayStore((state) => state.setArray);
 
   useEffect(() => {
-    setArray(generateArray(arrayLength));
+    setArray(arrayLength);
   }, [arrayLength, setArray]);
 
   // handlers
   const handleGenerate = useCallback(() => {
-    const arrays = generateArray(arrayLength);
-    setArray(arrays);
+    setArray(arrayLength);
   }, [arrayLength, setArray]);
 
   const handleSorting = () => {

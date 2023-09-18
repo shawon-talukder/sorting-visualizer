@@ -1,7 +1,8 @@
 "use client";
 
 import useArrayStore from "../hooks/useStore";
-import EmptyState from "./ui/EmptyState";
+
+import Loading from "../loading";
 
 const MIN = 10;
 const MAX = 250;
@@ -10,11 +11,7 @@ const ArrayBars = () => {
   const array = useArrayStore((state) => state.array);
 
   if (!array.length) {
-    return (
-      <div className="flex-1 bg-neutral-800 rounded py-10 h-full">
-        <EmptyState subTitle="Please select array length and generate new array." />
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
