@@ -1,23 +1,38 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { IoMdOptions } from "react-icons/io";
 
 import useArrayStore from "../hooks/useStore";
 
-import { generateArray } from "../utils/array";
 import Container from "./Container";
 import NavbarOptions from "./navbar/NavbarOptions";
 import Button from "./ui/Button";
 
+import { MergeSort } from "../algorithms/MergeSort";
+import { generateArray } from "../utils/array";
+
 const Navbar = () => {
   const arrayLength = useArrayStore((state) => state.arrayLength);
+  const selectedSort = useArrayStore((state) => state.selectedSort);
+  const array = useArrayStore((state) => state.array);
   const setArray = useArrayStore((state) => state.setArray);
+
+  useEffect(() => {
+    setArray(generateArray(arrayLength));
+  }, [arrayLength, setArray]);
 
   // handlers
   const handleGenerate = useCallback(() => {
-    setArray(generateArray(arrayLength));
+    const arrays = generateArray(arrayLength);
+    setArray(arrays);
   }, [arrayLength, setArray]);
+
+  const handleSorting = () => {
+    if (selectedSort === "merge_sort") {
+      MergeSort(array, 0, arrayLength - 1);
+    }
+  };
 
   return (
     <div className="w-full shadow-md z-[10] text-neutral-700">
@@ -36,9 +51,9 @@ const Navbar = () => {
             <div>
               <Button
                 label="Sort"
-                disabled
+                disabled={!selectedSort || array.length === 0}
                 outline={false}
-                onAction={() => {}}
+                onAction={handleSorting}
               />
             </div>
           </div>
