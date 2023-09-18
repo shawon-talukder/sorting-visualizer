@@ -10,6 +10,7 @@
  */
 
 import { create } from "zustand";
+import { generateArray } from "../utils/array";
 
 type State = {
   array: number[];
@@ -25,7 +26,7 @@ type Actions = {
 
 const useArrayStore = create<State & Actions>((set) => ({
   arrayLength: 200,
-  array: [],
+  array: generateArray(200),
   selectedSort: "",
   setArrayLength: (length) => set(() => ({ arrayLength: length })),
   setSelectedSort: (sort) => set(() => ({ selectedSort: sort })),
