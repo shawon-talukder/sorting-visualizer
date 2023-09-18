@@ -25,8 +25,8 @@ type Actions = {
 };
 
 const useArrayStore = create<State & Actions>((set) => ({
-  arrayLength: 200,
-  array: generateArray(200),
+  arrayLength: 50,
+  array: generateArray(50),
   selectedSort: "",
   setArrayLength: (length) => set(() => ({ arrayLength: length })),
   setSelectedSort: (sort) => set(() => ({ selectedSort: sort })),
