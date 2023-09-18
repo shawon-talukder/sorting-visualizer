@@ -10,8 +10,10 @@
  ***********************************************************************************************
  */
 
+import { AnimationTypes } from "../types";
+
 // function to merge all divided arrays
-export function Merge(array: number[], low: number, mid: number, high: number) {
+function Merge(array: number[], low: number, mid: number, high: number) {
   let res = array.slice(low, high + 1);
 
   // get three variable indicating indexes
@@ -49,16 +51,29 @@ export function Merge(array: number[], low: number, mid: number, high: number) {
   }
 }
 
-export function MergeSort(array: number[], startInd: number, endInd: number) {
+function MergeSort(
+  array: number[],
+  startInd: number,
+  endInd: number,
+  animations: AnimationTypes[]
+) {
   if (startInd >= endInd) return;
 
   //get mid of the array
   let mid = Math.floor(startInd + (endInd - startInd) / 2);
 
   // recursive call to divide array
-  MergeSort(array, startInd, mid);
-  MergeSort(array, mid + 1, endInd);
+  MergeSort(array, startInd, mid, animations);
+  MergeSort(array, mid + 1, endInd, animations);
 
   // merge all array
   Merge(array, startInd, mid, endInd);
+}
+
+export function MergeHelper(array: number[], length: number) {
+  let animations: AnimationTypes[] = [{ swap: [], comparison: [] }];
+
+  MergeSort(array, 0, length - 1, animations);
+
+  return animations;
 }
