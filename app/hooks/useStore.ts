@@ -19,7 +19,7 @@ type State = {
 };
 
 type Actions = {
-  setArray: (arrLength: State["arrayLength"]) => void;
+  setArray: (arr: State["array"]) => void;
   setArrayLength: (length: State["arrayLength"]) => void;
   setSelectedSort: (sort: State["selectedSort"]) => void;
 };
@@ -30,7 +30,7 @@ const useArrayStore = create<State & Actions>((set) => ({
   selectedSort: "",
   setArrayLength: (length) => set(() => ({ arrayLength: length })),
   setSelectedSort: (sort) => set(() => ({ selectedSort: sort })),
-  setArray: (arrLength) => set(() => ({ array: generateArray(arrLength) })),
+  setArray: (arr) => set(() => ({ array: arr })),
 }));
 
 export default useArrayStore;
