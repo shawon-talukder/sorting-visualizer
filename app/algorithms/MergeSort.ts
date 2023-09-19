@@ -31,16 +31,17 @@ function Merge(
   let ai = low;
 
   while (li <= mid && ri <= high) {
-    const animation: AnimationTypes = { swap: [], comparison: [] };
+    const animation: AnimationTypes = { comparison: [], swap: [] };
     const left = res[li - low];
     const right = res[ri - low];
 
     animation.comparison = [li, ri];
     if (left <= right) {
+      animation.swap = [ai, li];
       array[ai++] = left;
       li++;
     } else {
-      animation.swap = [ai, right];
+      animation.swap = [ai, ri];
       array[ai++] = right;
       ri++;
     }
