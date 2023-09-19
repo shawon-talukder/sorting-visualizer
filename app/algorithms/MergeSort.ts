@@ -10,10 +10,16 @@
  ***********************************************************************************************
  */
 
-import { AnimationTypes } from "../types";
+import { AnimationTypes } from "../types/index";
 
 // function to merge all divided arrays
-function Merge(array: number[], low: number, mid: number, high: number) {
+function Merge(
+  array: number[],
+  low: number,
+  mid: number,
+  high: number,
+  animations: AnimationTypes[]
+) {
   let res = array.slice(low, high + 1);
 
   // get three variable indicating indexes
@@ -25,16 +31,22 @@ function Merge(array: number[], low: number, mid: number, high: number) {
   let ai = low;
 
   while (li <= mid && ri <= high) {
+    const animation: AnimationTypes = { swap: [], comparison: [] };
     const left = res[li - low];
     const right = res[ri - low];
 
+    animation.comparison = [li - low, ri - low];
     if (left <= right) {
+      animation.swap = [left, left];
       array[ai++] = left;
       li++;
     } else {
+      animation.swap = [left, right];
       array[ai++] = right;
       ri++;
     }
+
+    animations.push(animation);
   }
 
   // if any array element leftover, insert them into the main array
@@ -67,11 +79,11 @@ function MergeSort(
   MergeSort(array, mid + 1, endInd, animations);
 
   // merge all array
-  Merge(array, startInd, mid, endInd);
+  Merge(array, startInd, mid, endInd, animations);
 }
 
-export function MergeHelper(array: number[], length: number) {
-  let animations: AnimationTypes[] = [{ swap: [], comparison: [] }];
+export function MergeHelper(array: number[], length: number): AnimationTypes[] {
+  let animations: AnimationTypes[] = [];
 
   MergeSort(array, 0, length - 1, animations);
 
