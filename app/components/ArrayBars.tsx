@@ -24,7 +24,7 @@ const ArrayBars = () => {
             width: `1px`,
             maxWidth: "50px",
           }}
-          className="bg-cyan-600 justify-end flex-1 rounded-t"
+          className="array_bar bg-cyan-600 justify-end flex-1 rounded-t"
         ></div>
       ))}
     </div>
