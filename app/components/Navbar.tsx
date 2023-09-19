@@ -26,6 +26,9 @@ const Navbar = () => {
 
   const setArray = useArrayStore((state) => state.setArray);
 
+  // set delay
+  const DELAY = arrayLength > 200 ? 10 : arrayLength > 100 ? 30 : 50;
+
   useEffect(() => {
     setArray(generateArray(arrayLength));
   }, [arrayLength, setArray]);
@@ -40,37 +43,58 @@ const Navbar = () => {
 
     if (selectedSort === "merge_sort") {
       const animations: AnimationTypes[] = MergeHelper(array, arrayLength);
-      const arrayDivs = document.getElementsByClassName(
-        "array_bar"
-      ) as HTMLCollectionOf<HTMLElement>;
+
+      const arrayDivContainer = document.getElementById("divContainer");
 
       for (let i = 0; i < animations.length; i++) {
+        // await delay(DELAY);
+        const arrayDivs = document.getElementsByClassName(
+          "array_bar"
+        ) as HTMLCollectionOf<HTMLElement>;
         let { swap, comparison } = animations[i];
 
         // comparison functionality
         const [first, second] = comparison;
-
+        console.log(comparison, swap);
         if (first !== undefined && second !== undefined) {
           const firstBar = arrayDivs[first];
           const secondBar = arrayDivs[second];
 
-          firstBar.classList.add("bg-green-400");
-          secondBar.classList.add("bg-green-400");
+          firstBar.classList.add(COMPARISON_COLOR);
+          secondBar.classList.add(COMPARISON_COLOR);
 
-          await delay(20);
+          await delay(DELAY);
+          // firstBar.classList.remove(COMPARISON_COLOR);
+          // secondBar.classList.remove(COMPARISON_COLOR);
 
-          const [swapInd, swapValue] = swap;
+          const [toWhere, toMove] = swap;
+          // if (toWhere === toMove) {
+          //   // arrayDivs[toWhere].classList.add("bg-orange-400");
+          // } else {
+          //   // arrayDivs[toWhere].classList.add("bg-red-400");
+          //   // arrayDivs[toMove].classList.add("bg-red-400");
+          // }
 
-          firstBar.classList.add("bg-red-400");
-          secondBar.classList.add("bg-red-400");
+          await delay(DELAY);
+          if (toWhere < toMove) {
+            // add before current index
+            arrayDivContainer?.insertBefore(
+              arrayDivs[toMove],
+              arrayDivs[toWhere]
+            );
+          }
 
-          await delay(20);
+          // await delay(DELAY);
+          // // remove the element and add before index
+          // arrayDivContainer?.removeChild(secondBar);
 
-          await delay(20);
-          firstBar.classList.remove("bg-red-400");
-          secondBar.classList.remove("bg-red-400");
-          firstBar.classList.remove("bg-green-400");
-          secondBar.classList.remove("bg-green-400");
+          // await delay(DELAY);
+          // if (toWhere === toMove) {
+          //   arrayDivs[toWhere].classList.remove("bg-orange-400");
+          // } else {
+          //   arrayDivs[toWhere].classList.remove("bg-red-400");
+          //   arrayDivs[toMove].classList.remove("bg-red-400");
+          // }
         }
       }
     }
