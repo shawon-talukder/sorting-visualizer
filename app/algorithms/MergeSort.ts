@@ -35,13 +35,12 @@ function Merge(
     const left = res[li - low];
     const right = res[ri - low];
 
-    animation.comparison = [li - low, ri - low];
+    animation.comparison = [li, ri];
     if (left <= right) {
-      animation.swap = [left, left];
       array[ai++] = left;
       li++;
     } else {
-      animation.swap = [left, right];
+      animation.swap = [ai, right];
       array[ai++] = right;
       ri++;
     }
@@ -53,13 +52,11 @@ function Merge(
 
   // if left side index is still left
   while (li <= mid) {
-    array[ai++] = res[li - low];
-    li++;
+    array[ai++] = res[li++ - low];
   }
   // if right side index is still left
   while (ri <= high) {
-    array[ai++] = res[ri - low];
-    ri++;
+    array[ai++] = res[ri++ - low];
   }
 }
 
