@@ -1,0 +1,45 @@
+name: Bug Report
+description: Bug in the project!
+labels: ["bug"]
+body: 
+  - type: markdown
+    attributes: 
+      value: |
+      please fill out the following sections and help everyone indentify and fix the bug
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe your issue.
+      placeholder: describe your issue.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: What are the steps to reproduce the issue? Please illustrate 
+    validations: 
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What was your expectation?
+      placeholder: What you expected, and what wrong it is happening.
+    validations: 
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes: 
+      label: Any additional screenshots/video [Optional]
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Extra
+      options:
+        - label: I have searched to check if related issue already exists
+          required: true
+  - type: markdown
+    id: gratitude
+    attributes:
+      value: |
+        Thanks for reporting the issue! We will get back to you as soos as possible. 
