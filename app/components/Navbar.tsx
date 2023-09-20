@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdOptions } from "react-icons/io";
 
 import useArrayStore from "../hooks/useStore";
@@ -12,10 +12,10 @@ import Button from "./ui/Button";
 import { MergeHelper } from "../algorithms/MergeSort";
 import { AnimationTypes } from "../types/index";
 import { generateArray } from "../utils/array";
-import { delay } from "../utils/delay";
+import { delay, getDelayInMS } from "../utils/delay";
 
-const COMPARISON_COLOR = "bg-blue-300";
-const DIFF_COLOR = "bg-red-300";
+const COMPARISON_COLOR = "bg-blue-400";
+const DIFF_COLOR = "bg-red-400";
 
 const Navbar = () => {
   const [isLoading, setIsloading] = useState(false);
@@ -23,20 +23,21 @@ const Navbar = () => {
   const arrayLength = useArrayStore((state) => state.arrayLength);
   const selectedSort = useArrayStore((state) => state.selectedSort);
   const array = useArrayStore((state) => state.array);
-
   const setArray = useArrayStore((state) => state.setArray);
 
   // set delay
-  const DELAY = arrayLength > 200 ? 10 : arrayLength > 100 ? 30 : 50;
+  const DELAY_MS = getDelayInMS(arrayLength);
 
   useEffect(() => {
     setArray(generateArray(arrayLength));
   }, [arrayLength, setArray]);
 
   // handlers
-  const handleGenerate = useCallback(() => {
+
+  // handler to generate new array
+  const handleGenerate = () => {
     setArray(generateArray(arrayLength));
-  }, [arrayLength, setArray]);
+  };
 
   const handleSorting = async () => {
     setIsloading(true);
@@ -47,59 +48,38 @@ const Navbar = () => {
       const arrayDivContainer = document.getElementById("divContainer");
 
       for (let i = 0; i < animations.length; i++) {
-        // await delay(DELAY);
         const arrayDivs = document.getElementsByClassName(
           "array_bar"
         ) as HTMLCollectionOf<HTMLElement>;
-        let { swap, comparison } = animations[i];
+
+        const { swap, comparison } = animations[i];
 
         // comparison functionality
         const [first, second] = comparison;
-        console.log(comparison, swap);
+
         if (first !== undefined && second !== undefined) {
           const firstBar = arrayDivs[first];
           const secondBar = arrayDivs[second];
 
-          firstBar.classList.add(COMPARISON_COLOR);
-          secondBar.classList.add(COMPARISON_COLOR);
-
-          await delay(DELAY);
-          // firstBar.classList.remove(COMPARISON_COLOR);
-          // secondBar.classList.remove(COMPARISON_COLOR);
+          await delay(DELAY_MS);
 
           const [toWhere, toMove] = swap;
-          // if (toWhere === toMove) {
-          //   // arrayDivs[toWhere].classList.add("bg-orange-400");
-          // } else {
-          //   // arrayDivs[toWhere].classList.add("bg-red-400");
-          //   // arrayDivs[toMove].classList.add("bg-red-400");
-          // }
 
-          await delay(DELAY);
+          // if towhere is greater means duplicating the comparison.
+          if (toWhere >= toMove) continue;
+
+          await delay(DELAY_MS);
+
           if (toWhere < toMove) {
-            // add before current index
+            // add before larger index
             arrayDivContainer?.insertBefore(
               arrayDivs[toMove],
               arrayDivs[toWhere]
             );
           }
-
-          // await delay(DELAY);
-          // // remove the element and add before index
-          // arrayDivContainer?.removeChild(secondBar);
-
-          // await delay(DELAY);
-          // if (toWhere === toMove) {
-          //   arrayDivs[toWhere].classList.remove("bg-orange-400");
-          // } else {
-          //   arrayDivs[toWhere].classList.remove("bg-red-400");
-          //   arrayDivs[toMove].classList.remove("bg-red-400");
-          // }
         }
       }
     }
-
-    //
     setIsloading(false);
   };
 
@@ -117,7 +97,7 @@ const Navbar = () => {
                 onAction={handleGenerate}
               />
             </div>
-            <NavbarOptions />
+            <NavbarOptions disabled={isLoading} />
             <div>
               <Button
                 label="Sort"
