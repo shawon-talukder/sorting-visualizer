@@ -3,12 +3,12 @@ description: Bug in the project!
 labels: ["bug"]
 body:
   - type: checkboxes
-      id: checks
-      attributes:
-        label: Extra
-        options:
-          - label: I have searched to check if related issue already exists
-            required: true 
+    id: checks
+    attributes:
+      label: Extra
+      options:
+        - label: I have searched to check if related issue already exists
+          required: true 
   - type: markdown
     attributes: 
       value: |
