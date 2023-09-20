@@ -8,8 +8,11 @@ import GradiantText from "../ui/GradiantText";
 import Tooltip from "../ui/Tooltip";
 
 import { MAX, MIN } from "@/app/components/ArrayBars";
+interface NavbarOptionsProps {
+  disabled?: boolean;
+}
 
-const NavbarOptions = () => {
+const NavbarOptions: React.FC<NavbarOptionsProps> = ({ disabled }) => {
   const arrayLength = useArrayStore((state) => state.arrayLength);
   const selectedSort = useArrayStore((state) => state.selectedSort);
   const setArrayLength = useArrayStore((state) => state.setArrayLength);
@@ -72,8 +75,9 @@ const NavbarOptions = () => {
             min={MIN}
             max={MAX}
             value={arrayLength}
+            disabled={disabled}
             onChange={(e) => setArrayLength(parseInt(e.target.value))}
-            className="range cursor-pointer w-full accent-indigo-700 "
+            className="range cursor-pointer w-full accent-indigo-700 disabled:cursor-not-allowed disabled:accent-red-400"
           />
         </div>
       </div>
@@ -81,6 +85,7 @@ const NavbarOptions = () => {
         <select
           className="w-full px-6 py-2 rounded-md outline-none focus:ring-2 focus:ring-indigo-600 text-neutral-600 cursor-pointer"
           name="sort_selection"
+          disabled={disabled}
           value={selectedSort}
           onChange={(e) => setSelectedSort(e.target.value)}
         >
