@@ -5,17 +5,13 @@ import { IoMdOptions } from "react-icons/io";
 
 import useArrayStore from "../hooks/useStore";
 
+import { mergeSortAnimation } from "./animations/MergeSortAnimation";
+
 import Container from "./Container";
 import NavbarOptions from "./navbar/NavbarOptions";
 import Button from "./ui/Button";
 
-import { MergeHelper } from "../algorithms/MergeSort";
-
-import { AnimationTypes } from "../types/index";
 import { generateArray } from "../utils/array";
-import { COMPARISON_COLOR, DIFF_COLOR } from "../utils/constants";
-import { delay, getDelayInMS } from "../utils/delay";
-import { mergeSortAnimation } from "./animations/MergeSortAnimation";
 
 const Navbar = () => {
   const [isLoading, setIsloading] = useState(false);
@@ -24,8 +20,6 @@ const Navbar = () => {
   const selectedSort = useArrayStore((state) => state.selectedSort);
   const array = useArrayStore((state) => state.array);
   const setArray = useArrayStore((state) => state.setArray);
-
-  
 
   useEffect(() => {
     setArray(generateArray(arrayLength));
@@ -42,7 +36,7 @@ const Navbar = () => {
     setIsloading(true);
 
     if (selectedSort === "merge_sort") {
-        await mergeSortAnimation(array, arrayLength);
+      await mergeSortAnimation(array, arrayLength);
     }
     setIsloading(false);
   };
