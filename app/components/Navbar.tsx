@@ -15,6 +15,7 @@ import { AnimationTypes } from "../types/index";
 import { generateArray } from "../utils/array";
 import { COMPARISON_COLOR, DIFF_COLOR } from "../utils/constants";
 import { delay, getDelayInMS } from "../utils/delay";
+import { mergeSortAnimation } from "./animations/MergeSortAnimation";
 
 const Navbar = () => {
   const [isLoading, setIsloading] = useState(false);
@@ -24,8 +25,7 @@ const Navbar = () => {
   const array = useArrayStore((state) => state.array);
   const setArray = useArrayStore((state) => state.setArray);
 
-  // set delay
-  const DELAY_MS = getDelayInMS(arrayLength);
+  
 
   useEffect(() => {
     setArray(generateArray(arrayLength));
@@ -42,60 +42,7 @@ const Navbar = () => {
     setIsloading(true);
 
     if (selectedSort === "merge_sort") {
-      const animations: AnimationTypes[] = MergeHelper(array, arrayLength);
-
-      const arrayDivContainer = document.getElementById("divContainer");
-
-      for (let i = 0; i < animations.length; i++) {
-        const arrayDivs = document.getElementsByClassName(
-          "array_bar"
-        ) as HTMLCollectionOf<HTMLElement>;
-
-        const { swap, comparison } = animations[i];
-
-        // comparison functionality
-        const [first, second] = comparison;
-
-        if (first !== undefined && second !== undefined) {
-          const firstBar = arrayDivs[first];
-          const secondBar = arrayDivs[second];
-
-          // mark two with comparison color
-          firstBar.classList.add(COMPARISON_COLOR);
-          secondBar.classList.add(COMPARISON_COLOR);
-
-          // set a delay and remove comparison color
-          await delay(DELAY_MS);
-
-          firstBar.classList.remove(COMPARISON_COLOR);
-          secondBar.classList.remove(COMPARISON_COLOR);
-
-          await delay(DELAY_MS);
-
-          const [toWhere, toMove] = swap;
-
-          // if towhere is greater means duplicating the comparison.
-          if (toWhere >= toMove) continue;
-
-          // add diff color
-          arrayDivs[toWhere].classList.add(DIFF_COLOR);
-          arrayDivs[toMove].classList.add(DIFF_COLOR);
-
-          await delay(DELAY_MS * 2);
-
-          // remove the diff colors
-          arrayDivs[toWhere].classList.remove(DIFF_COLOR);
-          arrayDivs[toMove].classList.remove(DIFF_COLOR);
-
-          if (toWhere < toMove) {
-            // add before larger index
-            arrayDivContainer?.insertBefore(
-              arrayDivs[toMove],
-              arrayDivs[toWhere]
-            );
-          }
-        }
-      }
+        await mergeSortAnimation(array, arrayLength);
     }
     setIsloading(false);
   };
