@@ -24,6 +24,6 @@ body:
     attributes:
       label: Proposal
       options:
-        label: I want to contribute implementing this feature
+        - label: I want to contribute implementing this feature
     validations:
       required: false
