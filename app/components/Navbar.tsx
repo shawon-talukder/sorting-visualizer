@@ -10,12 +10,11 @@ import NavbarOptions from "./navbar/NavbarOptions";
 import Button from "./ui/Button";
 
 import { MergeHelper } from "../algorithms/MergeSort";
+
 import { AnimationTypes } from "../types/index";
 import { generateArray } from "../utils/array";
+import { COMPARISON_COLOR, DIFF_COLOR } from "../utils/constants";
 import { delay, getDelayInMS } from "../utils/delay";
-
-const COMPARISON_COLOR = "bg-blue-400";
-const DIFF_COLOR = "bg-red-400";
 
 const Navbar = () => {
   const [isLoading, setIsloading] = useState(false);
@@ -61,6 +60,16 @@ const Navbar = () => {
           const firstBar = arrayDivs[first];
           const secondBar = arrayDivs[second];
 
+          // mark two with comparison color
+          firstBar.classList.add(COMPARISON_COLOR);
+          secondBar.classList.add(COMPARISON_COLOR);
+
+          // set a delay and remove comparison color
+          await delay(DELAY_MS);
+
+          firstBar.classList.remove(COMPARISON_COLOR);
+          secondBar.classList.remove(COMPARISON_COLOR);
+
           await delay(DELAY_MS);
 
           const [toWhere, toMove] = swap;
@@ -68,7 +77,15 @@ const Navbar = () => {
           // if towhere is greater means duplicating the comparison.
           if (toWhere >= toMove) continue;
 
-          await delay(DELAY_MS);
+          // add diff color
+          arrayDivs[toWhere].classList.add(DIFF_COLOR);
+          arrayDivs[toMove].classList.add(DIFF_COLOR);
+
+          await delay(DELAY_MS * 2);
+
+          // remove the diff colors
+          arrayDivs[toWhere].classList.remove(DIFF_COLOR);
+          arrayDivs[toMove].classList.remove(DIFF_COLOR);
 
           if (toWhere < toMove) {
             // add before larger index
