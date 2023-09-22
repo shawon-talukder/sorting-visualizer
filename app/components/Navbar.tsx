@@ -5,7 +5,7 @@ import { IoMdOptions } from "react-icons/io";
 
 import useArrayStore from "../hooks/useStore";
 
-import { mergeSortAnimation } from "./animations/MergeSortAnimation";
+import { mergeSortAnimation, selectionSortAnimation } from "./animations";
 
 import Container from "./Container";
 import NavbarOptions from "./navbar/NavbarOptions";
@@ -35,6 +35,12 @@ const Navbar = () => {
   const handleSorting = () => {
     setIsloading(true);
 
+    // selection sort
+    if (selectedSort === "selection_sort") {
+      selectionSortAnimation(array);
+    }
+
+    // merge sort
     if (selectedSort === "merge_sort") {
       mergeSortAnimation(array, arrayLength);
     }
