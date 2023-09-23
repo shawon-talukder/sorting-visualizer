@@ -15,7 +15,7 @@ export type AnimationTypes = {
 };
 
 export type SelectionSortTypes = {
-  currentIndex?: number;
+  currentIndex: number;
   swap: number[];
   comparison: number[][];
 };
