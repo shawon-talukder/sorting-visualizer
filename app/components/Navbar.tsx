@@ -32,17 +32,17 @@ const Navbar = () => {
     setArray(generateArray(arrayLength));
   };
 
-  const handleSorting = () => {
+  const handleSorting = async () => {
     setIsloading(true);
 
     // selection sort
     if (selectedSort === "selection_sort") {
-      selectionSortAnimation(array);
+      await selectionSortAnimation(array);
     }
 
     // merge sort
     if (selectedSort === "merge_sort") {
-      mergeSortAnimation(array, arrayLength);
+      await mergeSortAnimation(array, arrayLength);
     }
     setIsloading(false);
   };
