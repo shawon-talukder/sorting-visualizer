@@ -10,9 +10,12 @@
  */
 
 export type AnimationTypes = {
-  currentIndex?: number;
-  minIndex?: number;
   swap: number[];
   comparison: number[];
 };
 
+export type SelectionSortTypes = {
+  currentIndex?: number;
+  swap: number[];
+  comparison: number[][];
+};
