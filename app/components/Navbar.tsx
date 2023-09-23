@@ -5,14 +5,17 @@ import { IoMdOptions } from "react-icons/io";
 
 import useArrayStore from "../hooks/useStore";
 
-import { mergeSortAnimation, selectionSortAnimation } from "./animations";
+import {
+  bubbleSortAnimation,
+  mergeSortAnimation,
+  selectionSortAnimation,
+} from "./animations";
 
 import Container from "./Container";
 import NavbarOptions from "./navbar/NavbarOptions";
 import Button from "./ui/Button";
 
 import { generateArray } from "../utils/array";
-import { bubbleSortAnimation } from "./animations/BubbleSortAnimation";
 
 const Navbar = () => {
   const [isLoading, setIsloading] = useState(false);
