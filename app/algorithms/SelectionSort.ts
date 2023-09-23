@@ -9,17 +9,17 @@
  ***********************************************************************************************
  */
 
-import { AnimationTypes } from "../types";
+import { SelectionSortTypes } from "../types";
 
 export function SelectionSort(array: number[]) {
   // to set animations for sorting
-  const animations: AnimationTypes[] = [];
+  const animations: SelectionSortTypes[] = [];
 
   // array length
   const n = array.length;
 
   for (let i = 0; i < n - 1; i++) {
-    const animation: AnimationTypes = { swap: [], comparison: [] };
+    const animation: SelectionSortTypes = { swap: [], comparison: [] };
 
     // set the current index
     animation.currentIndex = i;
@@ -27,17 +27,16 @@ export function SelectionSort(array: number[]) {
     // declare minimum index
     let min_index = i;
 
-    animation.minIndex = min_index;
-
     for (let j = i + 1; j < n; j++) {
       // put comparison indexes to animation
-      animation.comparison = [j, min_index];
+      const nested = [j, min_index];
 
       // if any element in the array in lower than min_index's value, change min_index value
       if (array[j] < array[min_index]) {
         min_index = j;
-        animation.minIndex = min_index;
+        nested.push(min_index);
       }
+      animation.comparison.push(nested);
     }
 
     if (min_index !== i) {
@@ -45,6 +44,7 @@ export function SelectionSort(array: number[]) {
       animation.swap = [i, min_index];
 
       // if there is minimum index, swap
+      // swapping by destructuring
       [array[min_index], array[i]] = [array[i], array[min_index]];
     }
 
