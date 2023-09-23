@@ -19,10 +19,11 @@ export function SelectionSort(array: number[]) {
   const n = array.length;
 
   for (let i = 0; i < n - 1; i++) {
-    const animation: SelectionSortTypes = { swap: [], comparison: [] };
-
-    // set the current index
-    animation.currentIndex = i;
+    const animation: SelectionSortTypes = {
+      currentIndex: i,
+      swap: [],
+      comparison: [],
+    };
 
     // declare minimum index
     let min_index = i;
