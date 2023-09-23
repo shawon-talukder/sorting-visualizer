@@ -12,6 +12,7 @@ import NavbarOptions from "./navbar/NavbarOptions";
 import Button from "./ui/Button";
 
 import { generateArray } from "../utils/array";
+import { bubbleSortAnimation } from "./animations/BubbleSortAnimation";
 
 const Navbar = () => {
   const [isLoading, setIsloading] = useState(false);
@@ -39,7 +40,14 @@ const Navbar = () => {
     if (selectedSort === "selection_sort") {
       await selectionSortAnimation(array);
     }
+    // insertion sort
+    if (selectedSort === "insertion_sort") {
+    }
 
+    // bubble sort
+    if (selectedSort === "bubble_sort") {
+      await bubbleSortAnimation(array);
+    }
     // merge sort
     if (selectedSort === "merge_sort") {
       await mergeSortAnimation(array, arrayLength);
