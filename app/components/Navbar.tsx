@@ -7,6 +7,7 @@ import useArrayStore from "../hooks/useStore";
 
 import {
   bubbleSortAnimation,
+  insertionSortAnimation,
   mergeSortAnimation,
   selectionSortAnimation,
 } from "./animations";
@@ -45,6 +46,7 @@ const Navbar = () => {
     }
     // insertion sort
     if (selectedSort === "insertion_sort") {
+      await insertionSortAnimation(array);
     }
 
     // bubble sort
