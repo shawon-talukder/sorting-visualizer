@@ -42,7 +42,7 @@ export function SelectionSort(array: number[]) {
 
     if (min_index !== i) {
       // animation
-      animation.swap = [i, min_index];
+      animation.swap = [i, array[i], min_index, array[min_index]];
 
       // if there is minimum index, swap
       // swapping by destructuring
