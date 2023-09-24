@@ -21,8 +21,6 @@ export const selectionSortAnimation = async (array: number[]) => {
   // get delay in miliseconds againt the array length
   const DELAY_MS = getDelayInMS(array.length);
 
-  // container of all divs
-  const arrayDivContainer = document.getElementById("divContainer");
   for (let i = 0; i < animations.length; i++) {
     const arrayDivs = document.getElementsByClassName(
       "array_bar"
@@ -70,11 +68,11 @@ export const selectionSortAnimation = async (array: number[]) => {
     // currentBar.classList.remove(CURRENT_COLOR);
 
     // swap
-    const [first, second] = swap;
-    if (first === second) continue;
+    const [firstInd, firstValue, secondInd, secondValue] = swap;
+    if (firstInd === secondInd) continue;
 
-    const firstSwapBar = arrayDivs[first];
-    const secondSwapBar = arrayDivs[second];
+    const firstSwapBar = arrayDivs[firstInd];
+    const secondSwapBar = arrayDivs[secondInd];
 
     // add color before swapping
     firstSwapBar.classList.add(DIFF_COLOR);
@@ -87,12 +85,11 @@ export const selectionSortAnimation = async (array: number[]) => {
     secondSwapBar.classList.remove(DIFF_COLOR);
 
     // make a clone bofore swapping
-    const clone1 = firstSwapBar.cloneNode(true);
-    const clone2 = secondSwapBar.cloneNode(true);
+    const clone1 = firstSwapBar;
 
     // swap
-    arrayDivContainer?.replaceChild(clone2, firstSwapBar);
-    arrayDivContainer?.replaceChild(clone1, secondSwapBar);
+    firstSwapBar.style.height = `${secondValue}px`;
+    secondSwapBar.style.height = `${firstValue}px`;
 
     await delay(DELAY_MS);
   }
