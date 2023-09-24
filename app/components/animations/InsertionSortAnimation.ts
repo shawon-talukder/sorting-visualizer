@@ -10,6 +10,8 @@
  */
 
 import { InsertionSort } from "@/app/algorithms/InsertionSort";
+
+import { NestedSortTypes } from "@/app/types";
 import { COMPARISON_COLOR, DIFF_COLOR } from "@/app/utils/constants";
 import { delay, getDelayInMS } from "@/app/utils/delay";
 
@@ -18,7 +20,7 @@ export async function insertionSortAnimation(array: number[]) {
   const DELAY_MS = getDelayInMS(array.length);
 
   // get animations from algorithm
-  const animations = InsertionSort(array);
+  const animations: NestedSortTypes[] = InsertionSort(array);
 
   for (let i = 0; i < animations.length; i++) {
     const arrayDivs = document.getElementsByClassName(
