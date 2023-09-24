@@ -9,17 +9,17 @@
  ***********************************************************************************************
  */
 
-import { SelectionSortTypes } from "../types";
+import { NestedSortTypes } from "../types";
 
 export function SelectionSort(array: number[]) {
   // to set animations for sorting
-  const animations: SelectionSortTypes[] = [];
+  const animations: NestedSortTypes[] = [];
 
   // array length
   const n = array.length;
 
   for (let i = 0; i < n - 1; i++) {
-    const animation: SelectionSortTypes = {
+    const animation: NestedSortTypes = {
       currentIndex: i,
       swap: [],
       comparison: [],

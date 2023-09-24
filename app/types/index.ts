@@ -14,7 +14,7 @@ export type AnimationTypes = {
   comparison: number[];
 };
 
-export type SelectionSortTypes = {
+export type NestedSortTypes = {
   currentIndex: number;
   swap: number[];
   comparison: number[][];

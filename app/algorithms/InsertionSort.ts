@@ -9,14 +9,14 @@
  ***********************************************************************************************
  */
 
-import { SelectionSortTypes } from "../types";
+import { NestedSortTypes } from "../types";
 
 export function InsertionSort(array: number[]) {
   const n = array.length;
-  const animations: SelectionSortTypes[] = [];
+  const animations: NestedSortTypes[] = [];
 
   for (let i = 1; i < n; i++) {
-    const animation: SelectionSortTypes = {
+    const animation: NestedSortTypes = {
       currentIndex: i,
       comparison: [],
       swap: [],

@@ -10,12 +10,13 @@
  */
 
 import { SelectionSort } from "@/app/algorithms/SelectionSort";
-import { SelectionSortTypes } from "@/app/types";
+
+import { NestedSortTypes } from "@/app/types";
 import { COMPARISON_COLOR, DIFF_COLOR, MIN_COLOR } from "@/app/utils/constants";
 import { delay, getDelayInMS } from "@/app/utils/delay";
 
 export const selectionSortAnimation = async (array: number[]) => {
-  const animations: SelectionSortTypes[] = SelectionSort(array);
+  const animations: NestedSortTypes[] = SelectionSort(array);
 
   // get delay in miliseconds againt the array length
   const DELAY_MS = getDelayInMS(array.length);
