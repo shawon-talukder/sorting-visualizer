@@ -19,3 +19,9 @@ export type NestedSortTypes = {
   swap: number[];
   comparison: number[][];
 };
+
+export type QuickSortTypes = {
+  pivot: number;
+  swap: number[][];
+  comparison: number[][];
+};
