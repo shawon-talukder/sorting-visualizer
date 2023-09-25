@@ -9,6 +9,7 @@ import {
   bubbleSortAnimation,
   insertionSortAnimation,
   mergeSortAnimation,
+  quickSortAnimation,
   selectionSortAnimation,
 } from "./animations";
 
@@ -56,6 +57,11 @@ const Navbar = () => {
     // merge sort
     if (selectedSort === "merge_sort") {
       await mergeSortAnimation(array, arrayLength);
+    }
+
+    // quick sort
+    if (selectedSort === "quick_sort") {
+      await quickSortAnimation(array);
     }
     setIsloading(false);
   };
