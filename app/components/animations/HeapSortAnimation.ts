@@ -16,7 +16,7 @@ import { delay, getDelayInMS } from "@/app/utils/delay";
 
 export const heapSortAnimation = async (array: number[]) => {
   const animations: AnimationTypes[] = HeapSortHelper(array);
-  console.log(animations);
+
   const DELAY_MS = getDelayInMS(array.length);
   for (let i = 0; i < animations.length; i++) {
     const { comparison, swap } = animations[i];

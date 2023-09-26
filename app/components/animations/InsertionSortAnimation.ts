@@ -28,7 +28,6 @@ export async function insertionSortAnimation(array: number[]) {
     ) as HTMLCollectionOf<HTMLElement>;
     const { comparison, swap, currentIndex } = animations[i];
 
-    console.log(animations[i]);
     await delay(DELAY_MS);
 
     // loop through all comparisons
