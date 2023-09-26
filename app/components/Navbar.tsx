@@ -7,6 +7,7 @@ import useArrayStore from "../hooks/useStore";
 
 import {
   bubbleSortAnimation,
+  heapSortAnimation,
   insertionSortAnimation,
   mergeSortAnimation,
   quickSortAnimation,
@@ -62,6 +63,10 @@ const Navbar = () => {
     // quick sort
     if (selectedSort === "quick_sort") {
       await quickSortAnimation(array);
+    }
+    // heap sort
+    if (selectedSort === "heap_sort") {
+      await heapSortAnimation(array);
     }
     setIsloading(false);
   };
