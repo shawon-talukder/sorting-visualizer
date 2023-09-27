@@ -19,7 +19,6 @@ export async function bubbleSortAnimation(array: number[]) {
 
   // set delay
   const DELAY_MS = getDelayInMS(array.length);
-  const arrayDivContainer = document.getElementById("divContainer");
 
   for (let i = 0; i < animations.length; i++) {
     const arrayDivs = document.getElementsByClassName(
@@ -30,7 +29,7 @@ export async function bubbleSortAnimation(array: number[]) {
     const { comparison, swap } = animations[i];
 
     const [first, second] = comparison;
-    
+
     let firstBar = arrayDivs[first];
     let secondBar = arrayDivs[second];
 

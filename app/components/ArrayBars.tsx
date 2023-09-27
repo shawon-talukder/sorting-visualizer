@@ -9,7 +9,6 @@ export const MIN = 10;
 export const MAX = 220;
 
 const ArrayBars = () => {
-  const [numWidth, setNumWidth] = useState(10);
   const [isLoading, setIsLoading] = useState(true);
   const array = useArrayStore((state) => state.array);
 

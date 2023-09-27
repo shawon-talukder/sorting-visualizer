@@ -64,7 +64,7 @@ export const mergeSortAnimation = async (
       arrayDivs[toWhere].classList.add(DIFF_COLOR);
       arrayDivs[toMove].classList.add(DIFF_COLOR);
 
-      await delay(DELAY_MS * 2);
+      await delay(DELAY_MS);
 
       // remove the diff colors
       arrayDivs[toWhere].classList.remove(DIFF_COLOR);
