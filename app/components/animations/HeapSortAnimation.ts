@@ -10,9 +10,12 @@
  */
 
 import { HeapSortHelper } from "@/app/algorithms/HeapSort";
-import { AnimationTypes } from "@/app/types";
+
 import { COMPARISON_COLOR, DIFF_COLOR, MIN_COLOR } from "@/app/utils/constants";
 import { delay, getDelayInMS } from "@/app/utils/delay";
+
+import { AnimationTypes } from "@/app/types";
+import { toggleColor } from "./helper";
 
 export const heapSortAnimation = async (array: number[]) => {
   const animations: AnimationTypes[] = HeapSortHelper(array);
@@ -29,36 +32,34 @@ export const heapSortAnimation = async (array: number[]) => {
       const [first, second] = comparison;
 
       // add comparison color on indexes
-      arrayDivs[first].classList.add(COMPARISON_COLOR);
-      arrayDivs[second].classList.add(COMPARISON_COLOR);
-
-      await delay(DELAY_MS);
-
-      // remove comparison colors
-      arrayDivs[first].classList.remove(COMPARISON_COLOR);
-      arrayDivs[second].classList.remove(COMPARISON_COLOR);
+      await toggleColor({
+        firstBar: arrayDivs[first],
+        secondBar: arrayDivs[second],
+        delay_ms: DELAY_MS,
+        color: COMPARISON_COLOR,
+      });
     } else {
       await delay(DELAY_MS);
     }
 
     const [first, firstValue, second, secondValue, last] = swap;
     if (last !== -1) {
-      arrayDivs[last].classList.add(MIN_COLOR);
-
-      await delay(DELAY_MS);
-
-      arrayDivs[last].classList.remove(MIN_COLOR);
+      await toggleColor({
+        firstBar: arrayDivs[last],
+        delay_ms: DELAY_MS,
+        color: MIN_COLOR,
+      });
     }
-    await delay(DELAY_MS);
 
-    arrayDivs[first].classList.add(DIFF_COLOR);
-    arrayDivs[second].classList.add(DIFF_COLOR);
-    await delay(DELAY_MS);
-    arrayDivs[first].classList.remove(DIFF_COLOR);
-    arrayDivs[second].classList.remove(DIFF_COLOR);
+    // coloring with diff color before swap
+    await toggleColor({
+      firstBar: arrayDivs[first],
+      secondBar: arrayDivs[second],
+      delay_ms: DELAY_MS,
+      color: DIFF_COLOR,
+    });
 
     arrayDivs[first].style.height = `${firstValue}px`;
     arrayDivs[second].style.height = `${secondValue}px`;
   }
-  await delay(DELAY_MS);
 };

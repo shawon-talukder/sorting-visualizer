@@ -15,6 +15,7 @@ import { COMPARISON_COLOR, DIFF_COLOR } from "@/app/utils/constants";
 import { delay, getDelayInMS } from "@/app/utils/delay";
 
 import { AnimationTypes } from "@/app/types";
+import { toggleColor } from "./helper";
 
 export const mergeSortAnimation = async (
   array: number[],
@@ -36,22 +37,17 @@ export const mergeSortAnimation = async (
     const [first, second] = comparison;
 
     if (first !== undefined && second !== undefined) {
-      // delay for a second
-      await delay(DELAY_MS);
-
       // select two array bars that are comparing
       const firstBar = arrayDivs[first];
       const secondBar = arrayDivs[second];
 
       // mark two with comparison color
-      firstBar.classList.add(COMPARISON_COLOR);
-      secondBar.classList.add(COMPARISON_COLOR);
-
-      // set a delay and remove comparison color
-      await delay(DELAY_MS);
-
-      firstBar.classList.remove(COMPARISON_COLOR);
-      secondBar.classList.remove(COMPARISON_COLOR);
+      await toggleColor({
+        firstBar: firstBar,
+        secondBar: secondBar,
+        delay_ms: DELAY_MS,
+        color: COMPARISON_COLOR,
+      });
 
       await delay(DELAY_MS);
 
@@ -61,14 +57,12 @@ export const mergeSortAnimation = async (
       if (toWhere >= toMove) continue;
 
       // add diff color
-      arrayDivs[toWhere].classList.add(DIFF_COLOR);
-      arrayDivs[toMove].classList.add(DIFF_COLOR);
-
-      await delay(DELAY_MS);
-
-      // remove the diff colors
-      arrayDivs[toWhere].classList.remove(DIFF_COLOR);
-      arrayDivs[toMove].classList.remove(DIFF_COLOR);
+      await toggleColor({
+        firstBar: arrayDivs[toWhere],
+        secondBar: arrayDivs[toMove],
+        delay_ms: DELAY_MS,
+        color: DIFF_COLOR,
+      });
 
       if (toWhere < toMove) {
         // add before larger index

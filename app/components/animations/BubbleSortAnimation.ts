@@ -10,9 +10,12 @@
  */
 
 import { BubbleSort } from "@/app/algorithms/BubbleSort";
-import { AnimationTypes } from "@/app/types";
+
 import { COMPARISON_COLOR, DIFF_COLOR } from "@/app/utils/constants";
 import { delay, getDelayInMS } from "@/app/utils/delay";
+
+import { AnimationTypes } from "@/app/types";
+import { toggleColor } from "./helper";
 
 export async function bubbleSortAnimation(array: number[]) {
   const animations: AnimationTypes[] = BubbleSort(array);
@@ -34,25 +37,23 @@ export async function bubbleSortAnimation(array: number[]) {
     let secondBar = arrayDivs[second];
 
     if (first !== undefined && second !== undefined) {
-      firstBar.classList.add(COMPARISON_COLOR);
-      secondBar.classList.add(COMPARISON_COLOR);
-
-      await delay(DELAY_MS);
-
-      firstBar.classList.remove(COMPARISON_COLOR);
-      secondBar.classList.remove(COMPARISON_COLOR);
+      await toggleColor({
+        firstBar: firstBar,
+        secondBar: secondBar,
+        delay_ms: DELAY_MS,
+        color: COMPARISON_COLOR,
+      });
     }
 
     const [swapFirst, swapSecond] = swap;
 
     if (swapFirst !== undefined && swapSecond !== undefined) {
-      firstBar.classList.add(DIFF_COLOR);
-      secondBar.classList.add(DIFF_COLOR);
-
-      await delay(DELAY_MS);
-
-      firstBar.classList.remove(DIFF_COLOR);
-      secondBar.classList.remove(DIFF_COLOR);
+      await toggleColor({
+        firstBar: firstBar,
+        secondBar: secondBar,
+        delay_ms: DELAY_MS,
+        color: DIFF_COLOR,
+      });
 
       await delay(DELAY_MS);
       firstBar.style.height = `${swapSecond}px`;

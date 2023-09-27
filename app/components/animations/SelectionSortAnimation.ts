@@ -11,9 +11,11 @@
 
 import { SelectionSort } from "@/app/algorithms/SelectionSort";
 
-import { NestedSortTypes } from "@/app/types";
 import { COMPARISON_COLOR, DIFF_COLOR, MIN_COLOR } from "@/app/utils/constants";
 import { delay, getDelayInMS } from "@/app/utils/delay";
+
+import { NestedSortTypes } from "@/app/types";
+import { toggleColor } from "./helper";
 
 export const selectionSortAnimation = async (array: number[]) => {
   const animations: NestedSortTypes[] = SelectionSort(array);
@@ -37,14 +39,12 @@ export const selectionSortAnimation = async (array: number[]) => {
       // first and second is comparing index
       // third one is for minimum value's index
       // add comparison colors
-      arrayDivs[first].classList.add(COMPARISON_COLOR);
-      arrayDivs[second].classList.add(COMPARISON_COLOR);
-
-      // delay and remove the comparison colors
-      await delay(DELAY_MS);
-
-      arrayDivs[first].classList.remove(COMPARISON_COLOR);
-      arrayDivs[second].classList.remove(COMPARISON_COLOR);
+      await toggleColor({
+        color: COMPARISON_COLOR,
+        delay_ms: DELAY_MS,
+        firstBar: arrayDivs[first],
+        secondBar: arrayDivs[second],
+      });
 
       let minDiv;
       if (min_index !== undefined) {
@@ -53,11 +53,12 @@ export const selectionSortAnimation = async (array: number[]) => {
         minDiv = arrayDivs[second];
       }
 
-      minDiv.classList.add(MIN_COLOR);
-
-      await delay(DELAY_MS);
-
-      minDiv.classList.remove(MIN_COLOR);
+      // min element coloring
+      await toggleColor({
+        firstBar: minDiv,
+        color: MIN_COLOR,
+        delay_ms: DELAY_MS,
+      });
     }
 
     await delay(DELAY_MS);
@@ -70,14 +71,12 @@ export const selectionSortAnimation = async (array: number[]) => {
     const secondSwapBar = arrayDivs[secondInd];
 
     // add color before swapping
-    firstSwapBar.classList.add(DIFF_COLOR);
-    secondSwapBar.classList.add(DIFF_COLOR);
-
-    await delay(DELAY_MS);
-
-    // remove colors
-    firstSwapBar.classList.remove(DIFF_COLOR);
-    secondSwapBar.classList.remove(DIFF_COLOR);
+    await toggleColor({
+      color: DIFF_COLOR,
+      firstBar: firstSwapBar,
+      secondBar: secondSwapBar,
+      delay_ms: DELAY_MS,
+    });
 
     // swap
     firstSwapBar.style.height = `${secondValue}px`;
