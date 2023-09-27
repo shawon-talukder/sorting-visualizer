@@ -26,11 +26,9 @@ export const selectionSortAnimation = async (array: number[]) => {
       "array_bar"
     ) as HTMLCollectionOf<HTMLElement>;
 
-    const { comparison, swap, currentIndex } = animations[i];
+    const { comparison, swap } = animations[i];
 
     await delay(DELAY_MS);
-    const currentBar = arrayDivs[currentIndex];
-    // currentBar.classList.add(CURRENT_COLOR);
 
     // loop to showcase the traversal of rest of the array
     for (let j = 0; j < comparison.length; j++) {
@@ -64,9 +62,6 @@ export const selectionSortAnimation = async (array: number[]) => {
 
     await delay(DELAY_MS);
 
-    // clear current bar color
-    // currentBar.classList.remove(CURRENT_COLOR);
-
     // swap
     const [firstInd, firstValue, secondInd, secondValue] = swap;
     if (firstInd === secondInd) continue;
@@ -83,9 +78,6 @@ export const selectionSortAnimation = async (array: number[]) => {
     // remove colors
     firstSwapBar.classList.remove(DIFF_COLOR);
     secondSwapBar.classList.remove(DIFF_COLOR);
-
-    // make a clone bofore swapping
-    const clone1 = firstSwapBar;
 
     // swap
     firstSwapBar.style.height = `${secondValue}px`;
